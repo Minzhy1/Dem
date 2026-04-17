@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<style>
+    .for{
+       margin: 250px 800px;
+    }
+
+    p{
+        margin: 7px 0px;
+        font-size: 18px;
+    }
+</style>
+<body>
+<div>
+    <div class="for">
+<h1 style="margin: 10px -60px;">Зарегистрироваться</h1>
+<form method="post">
+    {% csrf_token %}
+    <p>Логин</p>
+    <input type="text" name="username">
+    <p>Пароль</p>
+    <input style=" margin:10px 0px" type="password" name="password">
+    <select name="role">
+        <option value="admin">Администратор</option>
+        <option value="manager">Менеджер</option>
+    </select><br>
+    <button style="margin: 5px 35px; font-size:17px;" type="submit">Войти</button> <br>
+    <a style="text-decoration: none;"href="{% url 'log' %}">Есть аккаунт? Войти!</a>
+</form>
+    </div>
+</div>
+</body>
+</html>

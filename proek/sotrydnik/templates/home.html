@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Сотрудники</title>
+</head>
+<style>
+    th, td{
+        border: 1px solid black;
+        padding: 5px;
+    }
+    table{
+        border-collapse: collapse;
+        margin: 10px 0px;
+    }
+    header{
+        background: grey;
+        padding: 10px;
+        display: flex;
+        space-between: justify-content;
+
+    }
+    img{
+        width: 90px;
+        height:auto;
+    }
+    form{
+        margin: 10px 0px;
+    }
+</style>
+<header>
+    <img src="{% static 'logo.png' %}" alt="logo">
+    <h1>Мои сотрудники</h1>
+    <a style="margin: 20px 0px;margin-left: 1400px; font-size: 25px; text-decoration: none; color: black" href="{% url 'log' %}">Выйти</a>
+</header>
+<body>
+<form method="get">
+    <input type="text" name="search" placeholder="ФИО сотрудника">
+    <select name="filter">
+        <option value="">Все</option>
+        {% for employe in employes %}
+        <option value="employe.position"> {{ employe.position.name }} </option>
+        {% endfor %}
+    </select>
+    <button type="submit">Найти</button>
+    <button type="submit"><a style="text-decoration: none; color: black;" href="?">Сбросить</a> </button>
+
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>ФИО сотрудника</th>
+            <th>Серия паспорта</th>
+            <th>Номер паспорта</th>
+            <th>Адрес проживания</th>
+            <th>Компания (в которой работает сотрудник)</th>
+            <th>Должность (занимаемая сотрудником)</th>
+            <th>Дата начала работы</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for employe in employes %}
+        <tr>
+            <td>{{ employe.employee_fio }}</td>
+            <td>{{ employe.passport_series }}</td>
+            <td>{{ employe.passport_number }}</td>
+            <td>{{ employe.address }}</td>
+            <td>{{ employe.company.name }}</td>
+            <td>{{ employe.position.name }}</td>
+            <td>{{ employe.start_date }}</td>
+            <td><a style="text-decoration: none; color: red" href="{% url 'del' employe.id %}">Удалить</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
